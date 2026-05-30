@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">KayFlood</string>
+    <string name="accessibility_description">KayFlood - Ekran üzerindeki metin kutularını otomatik tespit edip hızlıca ve sürekli yazıp gönderen gelişmiş akıllı flood/spam asistanıdır.</string>
+</resources>
