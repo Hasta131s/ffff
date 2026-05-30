@@ -310,12 +310,12 @@ class KayFloodService : AccessibilityService(), LifecycleOwner, SavedStateRegist
             setContent {
                 MaterialTheme(
                     colorScheme = darkColorScheme(
-                        primary = Color(0xFFFF2E93), // Cyber pink / energetic accent
-                        onPrimary = Color.White,
-                        secondary = Color(0xFF00F5FF), // Cyber cyan
-                        background = Color(0xFF121420), // Dark space gray
-                        surface = Color(0xFF1E2235), // Dark card surface
-                        onSurface = Color.White
+                        primary = Color(0xFFD0BCFF),
+                        onPrimary = Color(0xFF381E72),
+                        secondary = Color(0xFFEADDFF),
+                        background = Color(0xFF1C1B1F),
+                        surface = Color(0xFF2B2930),
+                        onSurface = Color(0xFFE6E1E5)
                     )
                 ) {
                     FloatingMenuUI(
@@ -348,7 +348,7 @@ class KayFloodService : AccessibilityService(), LifecycleOwner, SavedStateRegist
         val widthTransition by animateDpAsState(targetValue = if (isExpanded) 280.dp else 48.dp, label = "width")
         val heightTransition by animateDpAsState(targetValue = if (isExpanded) 360.dp else 48.dp, label = "height")
         val elevationTransition by animateDpAsState(targetValue = if (isExpanded) 12.dp else 4.dp, label = "elevation")
-        val roundedSize by animateDpAsState(targetValue = if (isExpanded) 16.dp else 24.dp, label = "rounded")
+        val roundedSize by animateDpAsState(targetValue = if (isExpanded) 24.dp else 24.dp, label = "rounded")
 
         Box(
             modifier = Modifier
@@ -358,8 +358,8 @@ class KayFloodService : AccessibilityService(), LifecycleOwner, SavedStateRegist
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
-                            Color(0xFF1E2235).copy(alpha = 0.95f),
-                            Color(0xFF121420).copy(alpha = 0.95f)
+                            Color(0xFF2B2930).copy(alpha = 0.98f),
+                            Color(0xFF1C1B1F).copy(alpha = 0.98f)
                         )
                     )
                 )
@@ -385,8 +385,8 @@ class KayFloodService : AccessibilityService(), LifecycleOwner, SavedStateRegist
                             .background(
                                 Brush.linearGradient(
                                     colors = listOf(
-                                        Color(0xFFFF2E93),
-                                        Color(0xFF9F1DDF)
+                                        Color(0xFFD0BCFF),
+                                        Color(0xFF381E72)
                                     )
                                 )
                             ),
@@ -407,7 +407,7 @@ class KayFloodService : AccessibilityService(), LifecycleOwner, SavedStateRegist
                             modifier = Modifier
                                 .size(10.dp)
                                 .clip(CircleShape)
-                                .background(Color(0xFF00FF66))
+                                .background(Color(0xFF00FF00))
                                 .align(Alignment.TopEnd)
                         )
                     }
@@ -509,7 +509,7 @@ class KayFloodService : AccessibilityService(), LifecycleOwner, SavedStateRegist
                                 .fillMaxWidth()
                                 .height(110.dp)
                                 .clip(RoundedCornerShape(8.dp))
-                                .background(Color(0xFF181C2E))
+                                .background(Color(0xFF1C1B1F))
                         ) {
                             if (presetsList.isEmpty()) {
                                 Box(
@@ -587,9 +587,9 @@ class KayFloodService : AccessibilityService(), LifecycleOwner, SavedStateRegist
                         horizontalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         val speeds = listOf(
-                            Triple("Turbo", 150L, Color(0xFFFF2E93)),
-                            Triple("Hızlı", 300L, Color(0xFFFF9F0A)),
-                            Triple("Sakin", 800L, Color(0xFF34C759))
+                            Triple("Turbo", 150L, Color(0xFFD0BCFF)),
+                            Triple("Hızlı", 300L, Color(0xFFEADDFF)),
+                            Triple("Sakin", 800L, Color(0xFF49454F))
                         )
                         speeds.forEach { (label, ms, color) ->
                             Box(
@@ -605,7 +605,9 @@ class KayFloodService : AccessibilityService(), LifecycleOwner, SavedStateRegist
                                     text = label,
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold,
-                                    color = if (floodDelayMs == ms) Color.White else Color.LightGray
+                                    color = if (floodDelayMs == ms) {
+                                        if (ms == 800L) Color.White else Color(0xFF381E72)
+                                    } else Color.LightGray
                                 )
                             }
                         }
@@ -629,7 +631,7 @@ class KayFloodService : AccessibilityService(), LifecycleOwner, SavedStateRegist
                                 text = activeAppName,
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.secondary,
+                                color = Color(0xFFD0BCFF),
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
                             )
@@ -640,7 +642,7 @@ class KayFloodService : AccessibilityService(), LifecycleOwner, SavedStateRegist
                                 text = "$messageCount",
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.ExtraBold,
-                                color = Color(0xFF00FF66)
+                                color = Color(0xFFEADDFF)
                             )
                         }
                     }
@@ -663,7 +665,8 @@ class KayFloodService : AccessibilityService(), LifecycleOwner, SavedStateRegist
                             },
                             modifier = Modifier.weight(1.5f),
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = if (isFloodingActive) Color(0xFFFF453A) else Color(0xFF34C759)
+                                containerColor = if (isFloodingActive) Color(0xFFF2B8B5) else Color(0xFFD0BCFF),
+                                contentColor = if (isFloodingActive) Color(0xFF601410) else Color(0xFF381E72)
                             ),
                             shape = RoundedCornerShape(8.dp),
                             contentPadding = PaddingValues(vertical = 10.dp)
@@ -671,7 +674,6 @@ class KayFloodService : AccessibilityService(), LifecycleOwner, SavedStateRegist
                             Icon(
                                 imageVector = if (isFloodingActive) Icons.Default.Pause else Icons.Default.PlayArrow,
                                 contentDescription = if (isFloodingActive) "Durdur" else "Başlat",
-                                tint = Color.White,
                                 modifier = Modifier.size(18.dp)
                             )
                             Spacer(modifier = Modifier.width(4.dp))

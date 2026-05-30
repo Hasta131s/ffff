@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
 
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = Color(0xFF0F111E) // Premium dark background
+                    color = Color(0xFF1C1B1F) // High Density dark background
                 ) {
                     Scaffold(
                         modifier = Modifier.fillMaxSize(),
@@ -152,68 +152,140 @@ fun KayFloodDashboard(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
-        // App Title Section with gradient
+        // App Header - High Density themed
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column {
-                Text(
-                    text = "KayFlood",
-                    fontSize = 32.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    color = Color.White
-                )
-                Text(
-                    text = "Gelişmiş Otomatik Yazıcı & Flood Asistanı",
-                    fontSize = 12.sp,
-                    color = Color.LightGray.copy(alpha = 0.8f)
-                )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                // High Density Purple Icon box
+                Box(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(Color(0xFFD0BCFF)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "KF",
+                        fontWeight = FontWeight.ExtraBold,
+                        color = Color(0xFF381E72),
+                        fontSize = 18.sp
+                    )
+                }
+
+                Column {
+                    Text(
+                        text = "KayFlood",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFFE6E1E5)
+                    )
+                    Text(
+                        text = "Sistem Aktif • v2.4.0",
+                        fontSize = 11.sp,
+                        color = Color(0xFFCAC4D0)
+                    )
+                }
             }
 
             Box(
                 modifier = Modifier
-                    .size(46.dp)
+                    .size(40.dp)
                     .clip(CircleShape)
-                    .background(
-                        Brush.linearGradient(
-                            colors = listOf(
-                                Color(0xFFFF2E93),
-                                Color(0xFF00F5FF)
-                            )
-                        )
-                    ),
+                    .background(Color.White.copy(alpha = 0.05f))
+                    .clickable { /* Extra settings options optionally */ },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.Default.FlashOn,
+                    imageVector = Icons.Default.MoreVert,
                     contentDescription = null,
-                    tint = Color.White,
-                    modifier = Modifier.size(24.dp)
+                    tint = Color(0xFFE6E1E5)
                 )
             }
         }
 
-        // Status Card
+        // Statistics Grid as seen in theme blueprint
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            // Stats 1
+            Card(
+                modifier = Modifier
+                    .weight(1f)
+                    .border(BorderStroke(1.dp, Color.White.copy(alpha = 0.05f)), RoundedCornerShape(24.dp)),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF2B2930)),
+                shape = RoundedCornerShape(24.dp)
+            ) {
+                Column(modifier = Modifier.padding(14.dp)) {
+                    Text(
+                        text = "ŞABLON COUNT",
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFFD0BCFF),
+                        letterSpacing = 1.sp
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "${presetsList.size} Adet",
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFFE6E1E5)
+                    )
+                }
+            }
+
+            // Stats 2
+            Card(
+                modifier = Modifier
+                    .weight(1f)
+                    .border(BorderStroke(1.dp, Color.White.copy(alpha = 0.05f)), RoundedCornerShape(24.dp)),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF2B2930)),
+                shape = RoundedCornerShape(24.dp)
+            ) {
+                Column(modifier = Modifier.padding(14.dp)) {
+                    Text(
+                        text = "HIZLI SPAM",
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFFD0BCFF),
+                        letterSpacing = 1.sp
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "150ms / ms",
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFFE6E1E5)
+                    )
+                }
+            }
+        }
+
+        // Status Card - High Density Rounded Style
         Card(
             modifier = Modifier
                 .fillMaxWidth()
                 .border(
                     width = 1.dp,
-                    color = if (isPermissionGranted) Color(0xFF00FF66).copy(alpha = 0.3f) else Color(0xFFFF453A).copy(alpha = 0.3f),
-                    shape = RoundedCornerShape(16.dp)
+                    color = if (isPermissionGranted) Color(0xFF00FF00).copy(alpha = 0.2f) else Color(0xFFF2B8B5).copy(alpha = 0.2f),
+                    shape = RoundedCornerShape(24.dp)
                 ),
             colors = CardDefaults.cardColors(
-                containerColor = Color(0xFF1E2136)
+                containerColor = Color(0xFF2B2930)
             ),
-            shape = RoundedCornerShape(16.dp)
+            shape = RoundedCornerShape(24.dp)
         ) {
             Column(
                 modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -221,10 +293,10 @@ fun KayFloodDashboard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Sistem Durumu",
-                        fontSize = 16.sp,
+                        text = "Sistem İzinleri",
+                        fontSize = 15.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.White
+                        color = Color(0xFFE6E1E5)
                     )
 
                     Row(
@@ -233,27 +305,27 @@ fun KayFloodDashboard(
                     ) {
                         Box(
                             modifier = Modifier
-                                .size(10.dp)
+                                .size(8.dp)
                                 .clip(CircleShape)
-                                .background(if (isPermissionGranted) Color(0xFF00FF66) else Color(0xFFFF453A))
+                                .background(if (isPermissionGranted) Color(0xFF00FF00) else Color(0xFFF2B8B5))
                         )
                         Text(
-                            text = if (isPermissionGranted) "HİZMET AKTİF" else "İZİN GEREKİYOR",
-                            fontSize = 12.sp,
+                            text = if (isPermissionGranted) "AKTİF" else "KAPALI",
+                            fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
-                            color = if (isPermissionGranted) Color(0xFF00FF66) else Color(0xFFFF453A)
+                            color = if (isPermissionGranted) Color(0xFF00FF00) else Color(0xFFF2B8B5)
                         )
                     }
                 }
 
                 Text(
                     text = if (isPermissionGranted) {
-                        "KayFlood Erişilebilirlik Servisi arka planda başarıyla bağlanmıştır. Diğer uygulamalara veya oyunlara girdiğinizde sağ kenardaki 'KF' simgesine basıp menüyü açarak anında flood başlatabilirsiniz!"
+                        "Her şey hazır! Oyun veya chat uygulamasına girdikten sonra sağ kısımdaki KayFlood mod menüsünü açıp istediğiniz şablonu seçerek floodu başlatabilirsiniz."
                     } else {
-                        "KayFlood'un çalışabilmesi için telefonunuzun Erişilebilirlik Ayarları altından izin vermeniz gerekmektedir."
+                        "KayFlood'un arka planda metin kutularını algılayıp yazabilmesi için Erişilebilirlik izni vermeniz gerekmektedir."
                     },
                     fontSize = 12.sp,
-                    color = Color.LightGray
+                    color = Color(0xFFCAC4D0)
                 )
 
                 if (!isPermissionGranted) {
@@ -263,98 +335,101 @@ fun KayFloodDashboard(
                             .fillMaxWidth()
                             .testTag("grant_permission_button"),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFFF2E93)
+                            containerColor = Color(0xFFEADDFF),
+                            contentColor = Color(0xFF21005D)
                         ),
-                        shape = RoundedCornerShape(10.dp)
+                        shape = RoundedCornerShape(16.dp),
+                        contentPadding = PaddingValues(vertical = 12.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Launch,
                             contentDescription = null,
-                            modifier = Modifier.size(18.dp)
+                            modifier = Modifier.size(16.dp)
                         )
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
-                            text = "Erişilebilirlik İzni Ver",
+                            text = "ERİŞİLEBİLİRLİK İZNİ VER",
                             fontWeight = FontWeight.Bold,
-                            fontSize = 13.sp
+                            fontSize = 12.sp
                         )
                     }
                 } else {
-                    // Show extra settings permission option for older/newer Android overlay if needed
                     OutlinedButton(
                         onClick = onOpenOverlaySettingsClick,
                         modifier = Modifier.fillMaxWidth(),
-                        border = BorderStroke(1.dp, Color.LightGray.copy(alpha = 0.2f)),
+                        border = BorderStroke(1.dp, Color(0xFF49454F)),
                         colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = Color(0xFF00F5FF)
+                            contentColor = Color(0xFFD0BCFF)
                         ),
-                        shape = RoundedCornerShape(10.dp)
+                        shape = RoundedCornerShape(16.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Settings,
                             contentDescription = null,
-                            modifier = Modifier.size(16.dp)
+                            modifier = Modifier.size(14.dp)
                         )
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text(text = "Üstte Gösterme İznini Düzenle", fontSize = 12.sp)
+                        Text(text = "ÜSTTE GÖSTERME İZNİNİ DÜZENLE", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             }
         }
 
-        // Add New Preset Form Card
+        // Add New Preset Form Card - High Density Rounded Style
         Card(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(BorderStroke(1.dp, Color.White.copy(alpha = 0.03f)), RoundedCornerShape(24.dp)),
             colors = CardDefaults.cardColors(
-                containerColor = Color(0xFF131728)
+                containerColor = Color(0xFF2B2930)
             ),
-            shape = RoundedCornerShape(16.dp)
+            shape = RoundedCornerShape(24.dp)
         ) {
             Column(
                 modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Text(
-                    text = "Yeni Şablon / Metin Ekle",
-                    fontSize = 15.sp,
+                    text = "Yeni Şablon Metni Ekle",
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = Color(0xFFE6E1E5)
                 )
 
                 OutlinedTextField(
                     value = newPresetTitle,
                     onValueChange = { newPresetTitle = it },
-                    label = { Text("Başlık (Örn: Hazır Cevap)") },
+                    label = { Text("Mesaş Başlığı (örn: GG WP)") },
                     modifier = Modifier.fillMaxWidth(),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color(0xFF00F5FF),
-                        unfocusedBorderColor = Color.White.copy(alpha = 0.1f),
-                        focusedLabelColor = Color(0xFF00F5FF),
-                        unfocusedLabelColor = Color.LightGray,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White
+                        focusedBorderColor = Color(0xFFD0BCFF),
+                        unfocusedBorderColor = Color(0xFF49454F),
+                        focusedLabelColor = Color(0xFFD0BCFF),
+                        unfocusedLabelColor = Color(0xFFCAC4D0),
+                        focusedTextColor = Color(0xFFE6E1E5),
+                        unfocusedTextColor = Color(0xFFE6E1E5)
                     ),
-                    shape = RoundedCornerShape(8.dp),
+                    shape = RoundedCornerShape(12.dp),
                     singleLine = true
                 )
 
                 OutlinedTextField(
                     value = newPresetText,
                     onValueChange = { newPresetText = it },
-                    label = { Text("Spam Edilecek Metin") },
+                    label = { Text("Sürekli Gönderilecek Metin") },
                     modifier = Modifier.fillMaxWidth(),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color(0xFFFF2E93),
-                        unfocusedBorderColor = Color.White.copy(alpha = 0.1f),
-                        focusedLabelColor = Color(0xFFFF2E93),
-                        unfocusedLabelColor = Color.LightGray,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White
+                        focusedBorderColor = Color(0xFFD0BCFF),
+                        unfocusedBorderColor = Color(0xFF49454F),
+                        focusedLabelColor = Color(0xFFD0BCFF),
+                        unfocusedLabelColor = Color(0xFFCAC4D0),
+                        focusedTextColor = Color(0xFFE6E1E5),
+                        unfocusedTextColor = Color(0xFFE6E1E5)
                     ),
-                    shape = RoundedCornerShape(8.dp)
+                    shape = RoundedCornerShape(12.dp)
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(2.dp))
 
                 Button(
                     onClick = {
@@ -371,38 +446,39 @@ fun KayFloodDashboard(
                                 newPresetText = ""
                             }
                         } else {
-                            Toast.makeText(context, "Lütfen boş alan bırakmayın!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Lütfen alanları dondurun!", Toast.LENGTH_SHORT).show()
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF1E2136),
-                        contentColor = Color.White
+                        containerColor = Color(0xFFD0BCFF),
+                        contentColor = Color(0xFF381E72)
                     ),
-                    border = BorderStroke(1.dp, Color(0xFFFF2E93).copy(alpha = 0.5f)),
-                    shape = RoundedCornerShape(8.dp)
+                    shape = RoundedCornerShape(16.dp),
+                    contentPadding = PaddingValues(vertical = 12.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
                         contentDescription = null,
-                        modifier = Modifier.size(18.dp)
+                        modifier = Modifier.size(16.dp)
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "Kayıtlı Şablonlara Ekle",
+                        text = "KAYDET VE LİSTEYE EKLE",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 13.sp
+                        fontSize = 12.sp
                     )
                 }
             }
         }
 
-        // Section Title: My Presets
+        // Section Title
         Text(
-            text = "Kayıtlı Flood Metinleri (${presetsList.size})",
-            fontSize = 16.sp,
+            text = "Kayıtlı Flood Kalıpları",
+            fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White
+            color = Color(0xFFE6E1E5),
+            modifier = Modifier.padding(horizontal = 4.dp)
         )
 
         // Presets list
@@ -414,10 +490,9 @@ fun KayFloodDashboard(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Henüz şablon eklemediniz.\nYukarıdan yenisini ekleyebilirsiniz.",
-                    textAlign = TextAlign.Center,
-                    color = Color.Gray,
-                    fontSize = 13.sp
+                    text = "Kayıtlı şablon bulunamadı.",
+                    color = Color(0xFFCAC4D0),
+                    fontSize = 12.sp
                 )
             }
         } else {
@@ -425,15 +500,18 @@ fun KayFloodDashboard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(bottom = 8.dp)
             ) {
                 items(presetsList) { preset ->
                     Card(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .border(BorderStroke(1.dp, Color(0xFF49454F).copy(alpha = 0.3f)), RoundedCornerShape(16.dp)),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color(0xFF121526)
+                            containerColor = Color(0xFF2B2930)
                         ),
-                        shape = RoundedCornerShape(10.dp)
+                        shape = RoundedCornerShape(16.dp)
                     ) {
                         Row(
                             modifier = Modifier
@@ -451,7 +529,7 @@ fun KayFloodDashboard(
                                         text = preset.title,
                                         fontSize = 13.sp,
                                         fontWeight = FontWeight.Bold,
-                                        color = Color.White,
+                                        color = Color(0xFFE6E1E5),
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis
                                     )
@@ -459,24 +537,25 @@ fun KayFloodDashboard(
                                         Box(
                                             modifier = Modifier
                                                 .background(
-                                                    Color(0xFF00F5FF).copy(alpha = 0.15f),
-                                                    RoundedCornerShape(4.dp)
+                                                    Color(0xFFD0BCFF).copy(alpha = 0.15f),
+                                                    RoundedCornerShape(6.dp)
                                                 )
-                                                .padding(horizontal = 4.dp, vertical = 2.dp)
+                                                .padding(horizontal = 5.dp, vertical = 2.dp)
                                         ) {
                                             Text(
-                                                text = "VARSAYILAN",
+                                                text = "SİSTEM",
                                                 fontSize = 8.sp,
                                                 fontWeight = FontWeight.Bold,
-                                                color = Color(0xFF00F5FF)
+                                                color = Color(0xFFD0BCFF)
                                             )
                                         }
                                     }
                                 }
+                                Spacer(modifier = Modifier.height(2.dp))
                                 Text(
                                     text = preset.text,
                                     fontSize = 11.sp,
-                                    color = Color.LightGray,
+                                    color = Color(0xFFCAC4D0),
                                     maxLines = 2,
                                     overflow = TextOverflow.Ellipsis
                                 )
@@ -494,7 +573,7 @@ fun KayFloodDashboard(
                                     Icon(
                                         imageVector = Icons.Default.Delete,
                                         contentDescription = "Sil",
-                                        tint = Color(0xFFFF453A),
+                                        tint = Color(0xFFF2B8B5),
                                         modifier = Modifier.size(16.dp)
                                     )
                                 }
